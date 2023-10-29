@@ -3,7 +3,7 @@
 ## Installation
 ### Method 1: Command-line installation
 ```php
-composer require udun/cregis-sdk-php
+composer require cregis/cregis-sdk-php
 ```
 
 ### Method 2: Installation via composer configuration
@@ -11,7 +11,7 @@ composer require udun/cregis-sdk-php
 ```php
 {
     "require": {
-        "udun/cregis-sdk-php": "^1.0"
+        "cregis/cregis-sdk-php": "^1.0"
     }
 }
 ```
