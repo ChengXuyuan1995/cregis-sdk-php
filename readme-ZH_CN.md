@@ -4,7 +4,7 @@ cregis-sdk-php
 ## 安装
 ### 方式1：命令安装
 ```php
-	composer require udun/cregis-sdk-php
+	composer require cregis/cregis-sdk-php
 ```
 
 ### 方式2：composer 配置安装
@@ -12,7 +12,7 @@ cregis-sdk-php
 ```php
 {
 	"require":{
-		"udun/cregis-sdk-php": "^1.0"
+		"cregis/cregis-sdk-php": "^1.0"
 	}
 }
 ```
