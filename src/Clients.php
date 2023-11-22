@@ -123,15 +123,17 @@ class Clients extends Api
 		$data = file_get_contents('php://input');
 		$params = json_decode($data, true);
 		$getSign = $params['sign'];
-		$sgin = $this->generateSign($apiKey, $params)
+		$sgin = $this->generateSign($apiKey, $params);
 		if($getSign!=$sgin){
 			$this->checkErrorAndThrow(['code'=>'-1','msg'=>'签名错误']);
-			return 
+			return ;
 		}
 		if($params['status']==1){
 			//充值成功业务
+			return "success";
 		}else if($params['status']==2){
 			//充值失败业务
+			return "success";
 		} 
 
 	}
@@ -161,23 +163,33 @@ class Clients extends Api
 	 * */
 	public function withdrawalBackUrl(){
 		$data = file_get_contents('php://input');
+		echo $data;
+		echo '<br/>---------<br/>';
 		$params = json_decode($data, true);
 		$getSign = $params['sign'];
-		$sgin = $this->generateSign($apiKey, $params)
+		$sgin = $this->generateSign($apiKey, $params);
+		echo "getSign:".$getSign;
+		echo "<br>";
+		echo "sgin:".$sgin;
 		if($getSign!=$sgin){
 			$this->checkErrorAndThrow(['code'=>'-1','msg'=>'签名错误']);
-			return 
+			return ;
 		}
 		if($params['status']==0){
 			// 提币成功业务
+			return "success";
 		}else if($params['status']==2){
 			//签名驳回
+			return "success";
 		}else if($params['status']==4){
 			//审批驳回
+			return "success";
 		}else if($params['status']==6){
 			//交易成功
+			return "success";
 		}else if($params['status']==7){
 			//交易失败
+			return "success";
 		}    
 
 	}

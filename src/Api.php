@@ -58,19 +58,22 @@ class Api extends AbstractAPI
         // 2. 拼接参数
         $paramStr = '';
         foreach ($params as $key => $value) {
-            if (!empty($value) && $key!="sign") {
+            if ($this->isNotEmpty($value) && $key!="sign") {
                 $paramStr .= $key . $value;
             }
         }
         // 3. 将API Key拼接到参数字符串最前面
         $paramStr = $apiKey . $paramStr;
-        // echo "<br/>-----sign--------<br/>";
-        // echo "加密前:".$paramStr;
+        echo "<br/>-----sign--------<br/>";
+        echo "加密前:".$paramStr;
         // 4. 计算MD5并转为小写作为签名
         $sign = md5($paramStr);
         // echo "加密后:".$sign;
         // echo "<br/>------sign-------<br/>";
         return $sign;
+    }
+    public function isNotEmpty($var) {
+        return isset($var) && $var !== '' && $var !== null;
     }
     /**
      *6位随机数生成 
@@ -100,7 +103,7 @@ class Api extends AbstractAPI
      * @param $result
      * @throws UdunDispatchException
      */
-    private function checkErrorAndThrow($result)
+    public function checkErrorAndThrow($result)
     {
         if (!$result || $result['code'] != '00000') {
             throw new CregisDispatchException($result['code'], $result['msg']);

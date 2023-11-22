@@ -1,8 +1,8 @@
 <?php
 require_once __DIR__.'/../vendor/autoload.php';
-$project_no = 1389058148376576; //项目编号
-$api_key= '793efc5a96ec47ee8e6f1f3bb08cc91b';// apikey
-$endpoint= 'https://ovhemmfm.cregis.io'; //网关节点
+$project_no = 1380000000000; //项目编号
+$api_key= '793efc5aXXXXXXXXXXXXXXXXXXXXcc91b';// apikey
+$endpoint= 'https://xxxxxxx.cregis.io'; //网关节点
 $callUrl = "https://localhost/callUrl"; //回调地址
 
 $result = new \Cregis\Dispatch\CregisDispatch([
@@ -87,5 +87,8 @@ $result = new \Cregis\Dispatch\CregisDispatch([
 
 /*------------------------------------------------------*/
 
+
+// $withdrawalBack = $result->withdrawalBackUrl()
+// var_dump($withdrawalBack);
 
  
