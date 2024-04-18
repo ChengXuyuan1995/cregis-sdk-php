@@ -1,10 +1,25 @@
 <?php
 namespace Cregis\Dispatch;
-class CregisDispatchException extends \Exception
+
+use Exception;
+
+class CregisDispatchException extends Exception
 {
-	public function __construct($code,$msg){
-		var_dump("code:".$code);
-		var_dump("msg:".$msg);
+    /**
+     * @param $msg
+     * @param $code
+     * @param Exception $exception
+     */
+	public function __construct($msg, $code, Exception $exception){
+        parent::__construct($msg, $code, $exception);
 	}
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return __CLASS__.":[{$this->code}]:[$this->message]\n";
+    }
 
 }

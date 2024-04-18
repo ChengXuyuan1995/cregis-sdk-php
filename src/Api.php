@@ -19,23 +19,19 @@ class Api extends AbstractAPI
         $this->callUrl = $callUrl;
     }
 
- 
+
     /**
-     * @param string $method  
-     * @param array $params
+     * @param string $method
+     * @param array $body
      * @return result
-     * @throws UdunDispatchException
+     * @throws CregisDispatchException
      */
     public function request(string $method, array $body)
     {
-        
         $body['nonce']=$this->generateRandomCode();
         $body['timestamp']=$this->getMillisecondTimestamp();
         $body['sign']=$this->generateSign($this->api_key,$body);
         $http = $this->getHttp();
-        // echo '<br>----body------<br>';
-        // var_dump($body);
-        // echo '<br>-----body-----<br>';
         $response = $http->json($this->endpoint. $method, $body); 
         $result = json_decode(strval($response->getBody()), true);
         // echo "结果：".json_encode($result);
@@ -51,10 +47,6 @@ class Api extends AbstractAPI
     public function generateSign($apiKey, $params) {
         // 1. 按字典序对参数进行排序
         ksort($params);
-        // echo "<br/>-----签名参数--------<br/>";
-        // var_dump($params);
-        // echo "<br/>-----签名参数--------<br/>";
-       
         // 2. 拼接参数
         $paramStr = '';
         foreach ($params as $key => $value) {
@@ -64,8 +56,6 @@ class Api extends AbstractAPI
         }
         // 3. 将API Key拼接到参数字符串最前面
         $paramStr = $apiKey . $paramStr;
-        echo "<br/>-----sign--------<br/>";
-        echo "加密前:".$paramStr;
         // 4. 计算MD5并转为小写作为签名
         $sign = md5($paramStr);
         // echo "加密后:".$sign;
@@ -95,20 +85,20 @@ class Api extends AbstractAPI
     */
     public function getMillisecondTimestamp() {
         $timestamp = microtime(true); // 获取当前时间戳，包含微秒
-        $milliseconds = round($timestamp * 1000); // 将微秒转换为毫秒
-
-        return $milliseconds;
+        // 将微秒转换为毫秒
+        return round($timestamp * 1000);
     }
+
     /**
      * @param $result
      * @throws UdunDispatchException
+     * @throws CregisDispatchException
      */
     public function checkErrorAndThrow($result)
     {
         if (!$result || $result['code'] != '00000') {
-            throw new CregisDispatchException($result['code'], $result['msg']);
+            throw new CregisDispatchException($result['msg'], $result['code']);
         }
     }
 }
 
-?>
