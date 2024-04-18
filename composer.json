@@ -1,5 +1,5 @@
 {
-    "name": "cregis/cregis-sdk-php",
+    "name": "cxy/cregis-sdk-php",
     "description": "cregis-sdk-php",
     "type": "project",
     "autoload": {
